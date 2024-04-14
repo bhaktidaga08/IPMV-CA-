@@ -1,0 +1,23 @@
+from PIL import Image
+import matplotlib.pyplot as plt
+
+width = 200
+height = 200
+
+image = Image.new("RGB", (width, height), "white")
+
+# Get the image data as a pixel access object
+pixels = image.load()
+
+# Modify the image pixel by pixel
+for y in range(height):
+    for x in range(width):
+        # Example: Make a checkerboard pattern
+        if (x // 50) % 2 == (y // 50) % 2:
+            pixels[x, y] = (0, 0, 0)  # Black
+        else:
+            pixels[x, y] = (255, 255, 255)  # White
+
+plt.imshow(image)
+plt.axis('off')  # Turn off axes
+plt.show()
