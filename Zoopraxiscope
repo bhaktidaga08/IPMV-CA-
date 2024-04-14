@@ -1,0 +1,62 @@
+import tkinter as tk
+from PIL import Image, ImageTk
+import time
+
+def create_canvas(root):
+    canvas = tk.Canvas(root)
+    canvas.pack()
+    return canvas
+
+def load_image(image_path):
+    return Image.open(image_path)
+
+def create_photo(image):
+    return ImageTk.PhotoImage(image)
+
+def display_image(canvas, photo):
+    canvas.create_image(0, 0, anchor=tk.NW, image=photo)
+
+def remove_image(canvas, photo):
+    canvas.delete("all")
+    del photo 
+
+def play_slideshow(root, canvas, images, frame_rate):
+    for image_path in images:
+        image = load_image(image_path)
+        photo = create_photo(image)
+        display_image(canvas, photo)
+        root.update()
+        time.sleep(1 / frame_rate)
+        image.close()
+
+def main():
+    root = tk.Tk()
+    canvas = create_canvas(root)
+
+    images = [
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 1.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 2.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 3.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 4.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 5.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 6.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 7.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 8.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 9.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 10.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 11.png",
+        "C:/Users/bhakt/OneDrive/Pictures/Screenshots/Frame 12.png"
+    ] 
+
+    frame_rate = 4  # Adjust frame rate as needed
+
+    play_slideshow(root, canvas, images, frame_rate)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
+
+
+        
+    
